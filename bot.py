@@ -11,6 +11,7 @@ arr = []
 
 @bot.message_handler(content_types=["text"])
 def get_text_messages(message):
+    print(message.chat.title)
     print('получение')
     for word in re.split(r'[^\w]', message.text):
         if len(word.split('_')) > 1:
@@ -18,11 +19,17 @@ def get_text_messages(message):
                 arr.append(part_word)
         else:
             arr.append(word)
-    # print(arr)
     for i in arr:
         if i in mat():
             bot.delete_message(message.chat.id, message.message_id)
-            bot.send_message(message.from_user.id, text=f'Ваше сообщение из чата {message.chat.id} удалено из-за слова {i}')
+            if message.chat.title is None:
+                bot.send_message(
+                    message.from_user.id,
+                    text=f'Вы хомите боту )')
+            else:
+                bot.send_message(
+                    message.from_user.id,
+                    text=f'Ваше сообщение из чата {message.chat.title} удалено из-за слова {i}')
             print('удаление')
 
 
