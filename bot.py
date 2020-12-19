@@ -11,7 +11,6 @@ arr = []
 
 @bot.message_handler(content_types=["text"])
 def get_text_messages(message):
-    print(message.chat.title)
     print('получение')
     for word in re.split(r'[^\w]', message.text):
         if len(word.split('_')) > 1:
